@@ -1,0 +1,12 @@
+{
+  "presets": ["@babel/preset-env", "@babel/preset-typescript"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"] // Sets the root directory for absolute imports
+      }
+    ],
+    ["babel-plugin-add-import-extension", { "extension": "js" }]
+  ]
+}
