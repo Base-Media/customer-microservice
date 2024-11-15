@@ -7,7 +7,11 @@ class CustomerController {
   // Create a new customer
   async createCustomer(req: Request, res: Response): Promise<void> {
     try {
-      const customer = await CustomerService.createCustomer(req.body);
+      const formDetails = req.body;
+      const userId = formDetails.userId || req.userDetails?._id;
+      const officeId = formDetails.officeId || req.userDetails?.officeId;
+      const customerData = { ...formDetails, userId, officeId };
+      const customer = await CustomerService.createCustomer(customerData);
       res.status(201).json(customer);
     } catch (error: any) {
       res.status(500).json({ error: error.message });

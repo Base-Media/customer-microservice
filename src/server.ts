@@ -2,12 +2,17 @@
 
 import express, { Request, Response } from 'express';
 import connectDB from './config/database';
+import appRoutes from './app';
+
 const app = express();
+
 const port = 3000;
 
+app.use(appRoutes);
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, world!');
 });
+
 connectDB();
 
 app.listen(port, () => {
