@@ -1,23 +1,28 @@
 /** @format */
 
 import { Request, Response } from 'express';
-import CustomerService from '../services/customerService';
+import CustomerService from '../services/CustomerService';
 
 class CustomerController {
   // Create a new customer
   async createCustomer(req: Request, res: Response): Promise<void> {
     try {
       const formDetails = req.body;
-      const userId = formDetails.userId || req.userDetails?._id;
-      const officeId = formDetails.officeId || req.userDetails?.officeId;
-      const customerData = { ...formDetails, userId, officeId };
+      const customerData = { ...formDetails };
       const customer = await CustomerService.createCustomer(customerData);
       res.status(201).json(customer);
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }
   }
-
+  async initializeCustomer(req: Request, res: Response): Promise<void> {
+    try {
+      const { _id } = await CustomerService.initializeCustomer();
+      res.status(201).json({ _id }); // Respond with the generated _id
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
   // Find a customer by ID
   async findCustomerById(req: Request, res: Response): Promise<void> {
     try {

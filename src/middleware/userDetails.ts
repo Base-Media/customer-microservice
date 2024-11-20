@@ -9,6 +9,7 @@ declare global {
       userDetails?: {
         _id: string;
         officeId: string;
+        role: string;
       };
     }
   }
@@ -21,6 +22,7 @@ const userDetails = (req: Request, res: Response, next: NextFunction) => {
       req.userDetails = {
         _id: userDetails.userId,
         officeId: userDetails.officeId,
+        role: userDetails.role,
       };
       next();
     },

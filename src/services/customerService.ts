@@ -4,6 +4,10 @@ import Customer, { ICustomer } from '../models/customerModel';
 import { Types } from 'mongoose';
 
 class CustomerService {
+  async initializeCustomer(): Promise<{ _id: string }> {
+    const customer = new Customer(); // Create a new instance without saving
+    return { _id: customer._id.toString() }; // Only return the _id
+  }
   // Create a new customer
   async createCustomer(data: Partial<ICustomer>): Promise<ICustomer> {
     const customer = new Customer(data);
@@ -21,6 +25,14 @@ class CustomerService {
   // Find all customers
   async findAllCustomers(): Promise<ICustomer[]> {
     return await Customer.find().exec();
+  }
+
+  // search customers
+  async searchCustomers(query: string): Promise<ICustomer[]> {
+    const regex = new RegExp(query, 'i'); // 'i' for case-insensitive
+    return await Customer.find({
+      $or: [{ firstName: regex }, { lastName: regex }, { phoneNumber: regex }],
+    }).exec();
   }
 
   // Update a customer by ID

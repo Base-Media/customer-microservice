@@ -3,7 +3,7 @@
 import request from 'supertest';
 import express from 'express';
 import customerRoutes from '../api/customerRoutes';
-import CustomerService from '../services/customerService';
+import CustomerService from '../services/CustomerService';
 
 const app = express();
 app.use(express.json());

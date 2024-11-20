@@ -4,6 +4,7 @@ import mongoose, { Document, Schema, model } from 'mongoose';
 import EncryptSocial from '../utils/EncryptSocial';
 
 export interface ICustomer extends Document {
+  _id: mongoose.Types.ObjectId; // Explicitly define _id
   firstName: string;
   lastName: string;
   middleInitial?: string;
@@ -16,7 +17,6 @@ export interface ICustomer extends Document {
   ffmId?: string;
   memberId?: string;
   queueId: mongoose.Types.ObjectId;
-  officeId: mongoose.Types.ObjectId;
 }
 
 const encryptSocial = new EncryptSocial();
@@ -24,11 +24,9 @@ const customerSchema = new Schema<ICustomer>(
   {
     firstName: {
       type: String,
-      required: true,
     },
     lastName: {
       type: String,
-      required: true,
     },
     middleInitial: {
       type: String,
@@ -50,7 +48,6 @@ const customerSchema = new Schema<ICustomer>(
     },
     phoneNumber: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
@@ -64,15 +61,13 @@ const customerSchema = new Schema<ICustomer>(
     queueId: {
       type: Schema.Types.ObjectId,
     },
-    officeId: {
-      type: Schema.Types.ObjectId,
-    },
   },
   { timestamps: true, collection: 'customers' }
 );
 
 customerSchema.set('toJSON', { getters: true });
 customerSchema.set('toObject', { getters: true });
+
 const Customer = model<ICustomer>('Customer', customerSchema);
 
 export default Customer;
