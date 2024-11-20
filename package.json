@@ -23,7 +23,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mongoose": "^8.8.1",
-    "user-auth-token": "github:Base-Media/user-auth-token"
+    "user-auth-token": "git+ssh://git@github.com:Base-Media/user-auth-token.git"
   },
   "devDependencies": {
     "@babel/cli": "^7.25.9",

@@ -6,7 +6,7 @@ import appRoutes from './app';
 
 const app = express();
 
-const port = 4000;
+const port = 5000;
 
 app.use(appRoutes);
 app.get('/', (req: Request, res: Response) => {

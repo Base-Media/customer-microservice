@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 5000
 
 # Command to run your application
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/server.js"]
