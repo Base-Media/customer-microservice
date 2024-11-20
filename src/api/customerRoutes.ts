@@ -1,11 +1,15 @@
 /** @format */
 
 import express from 'express';
-import CustomerController from '../controller/customerController';
-
+import CustomerController from '../controllers/CustomerController';
+import userDetails from '../middleware/userDetails';
 const router = express.Router();
 
-router.post('/customers/initialize', CustomerController.initializeCustomer); // Endpoint to initialize a customer
+router.post(
+  '/customer/initialize',
+  userDetails,
+  CustomerController.initializeCustomer
+); // Endpoint to initialize a customer
 router.post('/customers', CustomerController.createCustomer); // Endpoint to create customer details
 router.get('/customers/:id', CustomerController.findCustomerById);
 router.get('/customers', CustomerController.findAllCustomers);

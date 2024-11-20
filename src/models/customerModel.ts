@@ -10,10 +10,12 @@ export interface ICustomer extends Document {
   middleInitial?: string;
   gender?: string;
   ssn?: string;
+  dob: Date;
   occupation?: string;
   householdIncome?: string;
   phoneNumber: string;
   email?: string;
+  officeId?: string;
   ffmId?: string;
   memberId?: string;
   queueId: mongoose.Types.ObjectId;
@@ -33,6 +35,9 @@ const customerSchema = new Schema<ICustomer>(
     },
     gender: {
       type: String,
+    },
+    dob: {
+      type: Date,
     },
     ssn: {
       type: String,
@@ -59,6 +64,9 @@ const customerSchema = new Schema<ICustomer>(
       type: String,
     },
     queueId: {
+      type: Schema.Types.ObjectId,
+    },
+    officeId: {
       type: Schema.Types.ObjectId,
     },
   },
