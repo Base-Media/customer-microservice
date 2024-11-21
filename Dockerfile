@@ -4,19 +4,20 @@ FROM node:20
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Configure Git to use HTTPS instead of SSHRUN git config --global url."https://github.com/".insteadOf "git@github.com:"
-
-# Copy the source code to the container
+# Copy only the source code AFTER installing dependencies
 COPY . .
 
 # Build the TypeScript code
 RUN npm run build
+
+# Ensure the dist directory is present (debugging step)
+RUN ls dist
 
 # Expose the port the app runs on
 EXPOSE 5000
