@@ -1,6 +1,6 @@
 /** @format */
 
-import Customer, { ICustomer } from '../models/CustomerModel';
+import Customer, { ICustomer } from '../models/customerModel';
 import { Types } from 'mongoose';
 
 class CustomerService {
