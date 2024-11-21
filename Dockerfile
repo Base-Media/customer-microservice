@@ -10,8 +10,8 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Configure Git to use HTTPS instead of SSH
-RUN git config --global url."https://github.com/".insteadOf "git@github.com:"
+# Configure Git to use HTTPS instead of SSHRUN git config --global url."https://github.com/".insteadOf "git@github.com:"
+
 # Copy the source code to the container
 COPY . .
 
