@@ -13,7 +13,7 @@ class AddressService {
   }
 
   async findAddressByCustomerId(customerId: string) {
-    return await Address.find({ customerId });
+    return await Address.findOne({ customerId });
   }
 }
 

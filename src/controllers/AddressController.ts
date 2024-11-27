@@ -27,10 +27,12 @@ class AddressController {
 
   async findAddressByCustomerId(req: Request, res: Response) {
     try {
-      const addresses = await AddressService.findAddressByCustomerId(
+      const address = await AddressService.findAddressByCustomerId(
         req.params.customerId
       );
-      res.status(200).json(addresses);
+
+      // Directly return the single object
+      res.status(200).json(address);
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }
