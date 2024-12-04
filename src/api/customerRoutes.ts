@@ -15,5 +15,6 @@ router.get('/customers/:id', CustomerController.findCustomerById);
 router.get('/customers', CustomerController.findAllCustomers);
 router.put('/customers/:id', CustomerController.updateCustomer);
 router.delete('/customers/:id', CustomerController.deleteCustomer);
+router.get('/customers/search', CustomerController.searchCustomers);
 
 export default router;

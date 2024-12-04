@@ -53,7 +53,7 @@ class CustomerService {
    * @returns {Promise<ICustomer[]>} - An array of matching customer objects.
    */
   async searchCustomers(query: string): Promise<ICustomer[]> {
-    const regex = new RegExp(query); // Create a case-insensitive regex
+    const regex = new RegExp(query, 'i'); // Create a case-insensitive regex
     return await Customer.find({
       $or: [
         { firstName: regex }, // Match first name

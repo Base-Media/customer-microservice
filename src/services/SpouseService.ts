@@ -13,7 +13,7 @@ class SpouseService {
   }
 
   async findSpouseByCustomerId(customerId: string) {
-    return await Spouse.find({ customerId });
+    return await Spouse.findOne({ customerId });
   }
 }
 
