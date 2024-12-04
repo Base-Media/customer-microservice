@@ -27,6 +27,7 @@ class SpouseController {
       const spouses = await SpouseService.findSpouseByCustomerId(
         req.params.customerId
       );
+      console.log('heres the spouse:', spouses);
       res.status(200).json(spouses);
     } catch (error: any) {
       res.status(500).json({ error: error.message });

@@ -13,6 +13,7 @@ router.post(
 router.post('/customers', CustomerController.createCustomer); // Endpoint to create customer details
 router.get('/customers/:id', CustomerController.findCustomerById);
 router.get('/customers', CustomerController.findAllCustomers);
+router.get('/customer/search', CustomerController.searchCustomers);
 router.put('/customers/:id', CustomerController.updateCustomer);
 router.delete('/customers/:id', CustomerController.deleteCustomer);
 
