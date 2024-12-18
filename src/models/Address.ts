@@ -9,7 +9,8 @@ export interface IAddress extends Document {
   state: string;
   zipCode: string;
   aptUnit?: string;
-  country: string; // Optional, for international use
+  country: string;
+  // Optional, for international use
 }
 
 const addressSchema = new Schema<IAddress>(

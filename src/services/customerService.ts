@@ -43,7 +43,13 @@ class CustomerService {
    * @returns {Promise<ICustomer[]>} - An array of all customer objects.
    */
   async findAllCustomers(): Promise<ICustomer[]> {
-    return await Customer.find().exec(); // Retrieve all customers
+    try {
+      const customers = await Customer.find({});
+      return customers;
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+      throw error;
+    }
   }
 
   /**

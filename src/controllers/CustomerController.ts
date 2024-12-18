@@ -2,7 +2,7 @@
 
 import { Request, Response } from 'express';
 import CustomerService from '../services/CustomerService';
-
+import mongoose from 'mongoose';
 class CustomerController {
   /**
    * Asynchronously creates a new customer using the provided request data.
@@ -54,6 +54,7 @@ class CustomerController {
    */
   async findCustomerById(req: Request, res: Response): Promise<void> {
     try {
+      const customerId = new mongoose.Types.ObjectId(req.params.id);
       const customer = await CustomerService.findCustomerById(req.params.id);
       if (!customer) {
         res.status(404).json({ error: 'Customer not found' });
