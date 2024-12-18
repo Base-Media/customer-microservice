@@ -1,7 +1,7 @@
 /** @format */
 
 import Customer, { ICustomer } from '../models/customerModel';
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 
 class CustomerService {
   /**
@@ -32,10 +32,24 @@ class CustomerService {
    * @throws {Error} - If the provided ID is invalid.
    */
   async findCustomerById(id: string): Promise<ICustomer | null> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new Error('Invalid customer ID'); // Validate the ID
+    console.log('Validating and fetching customer with ID:', id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      console.error('Invalid ObjectId format');
+      throw new Error('Invalid ObjectId format');
     }
-    return await Customer.findById(id).exec(); // Find the customer by ID
+
+    try {
+      const customer = await Customer.findById(new mongoose.Types.ObjectId(id));
+      console.log('Customer found:', customer);
+      return customer;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error querying database:', error.message);
+      } else {
+        console.error('Error querying database:', error);
+      }
+      throw new Error('Database query failed');
+    }
   }
 
   /**

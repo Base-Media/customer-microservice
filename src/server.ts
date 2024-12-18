@@ -1,35 +1,52 @@
 /** @format */
-
-import express, { Request, Response } from 'express';
+import express, { Application } from 'express'; // Use Application from express
+import { ApolloServer } from 'apollo-server-express';
 import connectDB from './config/database';
 import appRoutes from './app';
-import { graphqlHTTP } from 'express-graphql';
-import schema from './graphql/schema';
+import schema from './graphql/schema'; // Your GraphQL schema
 import resolvers from './graphql/resolvers';
-const app = express();
 
-const port = 5000;
+const app = express() as any; // Explicitly type the app as Application
+const port = 4000;
 
-app.use(appRoutes);
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema,
-    rootValue: resolvers,
-    graphiql: true,
-    customFormatErrorFn: (err) => {
+// Middleware for raw request logging
+app.use((req: { body: any }, res: any, next: () => void) => {
+  console.log('Raw Request Body:', req.body);
+  next();
+});
+
+// Connect to MongoDB
+connectDB();
+
+// Initialize Apollo Server
+const startApolloServer = async () => {
+  const server = new ApolloServer({
+    typeDefs: schema,
+    resolvers,
+    formatError: (err) => {
       console.error('GraphQL Error:', err.message);
       return { message: err.message };
     },
-  })
-);
+  });
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, world!');
-});
+  await server.start();
+  server.applyMiddleware({ app, path: '/graphql' });
 
-connectDB();
+  // Additional Express routes
+  app.use(appRoutes);
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+  // Root route
+  app.get('/', (req: any, res: { send: (arg0: string) => void }) => {
+    res.send('Hello, world!');
+  });
+
+  // Start the server
+  app.listen(port, () => {
+    console.log(
+      `Server is running at http://localhost:${port}${server.graphqlPath}`
+    );
+  });
+};
+
+// Start Apollo Server
+startApolloServer();

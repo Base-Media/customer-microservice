@@ -1,8 +1,7 @@
 /** @format */
+import { gql } from 'apollo-server-express';
 
-import { buildSchema } from 'graphql';
-
-const schema = buildSchema(`
+const schema = gql`
   type Customer {
     id: ID!
     firstName: String!
@@ -110,6 +109,6 @@ const schema = buildSchema(`
       customerId: ID!
     ): Spouse
   }
-`);
+`;
 
 export default schema;

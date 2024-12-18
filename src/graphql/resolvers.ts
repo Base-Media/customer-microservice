@@ -12,10 +12,12 @@ const resolvers = {
       console.log('Received ID:', id);
 
       if (!id) {
+        console.error('No ID provided');
         throw new Error('Customer ID is required');
       }
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.error(`Invalid customer ID format: ${id}`);
         throw new Error('Invalid customer ID format');
       }
 
