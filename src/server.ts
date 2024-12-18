@@ -1,5 +1,5 @@
 /** @format */
-import express, { Application } from 'express'; // Use Application from express
+import express from 'express'; // Use Application from express
 import { ApolloServer } from 'apollo-server-express';
 import connectDB from './config/database';
 import appRoutes from './app';
@@ -7,13 +7,9 @@ import schema from './graphql/schema'; // Your GraphQL schema
 import resolvers from './graphql/resolvers';
 
 const app = express() as any; // Explicitly type the app as Application
-const port = 4000;
+const port = 5000;
 
 // Middleware for raw request logging
-app.use((req: { body: any }, res: any, next: () => void) => {
-  console.log('Raw Request Body:', req.body);
-  next();
-});
 
 // Connect to MongoDB
 connectDB();
