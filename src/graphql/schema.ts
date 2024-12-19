@@ -1,8 +1,8 @@
 /** @format */
-import { gql } from 'apollo-server-express';
+import { gql } from 'graphql-tag';
 
 const schema = gql`
-  type Customer {
+  type Customer @key(fields: "id") {
     id: ID!
     firstName: String!
     lastName: String!
@@ -20,7 +20,7 @@ const schema = gql`
     queueId: ID
   }
 
-  type Dependent {
+  type Dependent @key(fields: "id") {
     id: ID!
     firstName: String!
     lastName: String!
@@ -31,7 +31,7 @@ const schema = gql`
     customerId: ID!
   }
 
-  type Spouse {
+  type Spouse @key(fields: "id") {
     id: ID!
     firstName: String!
     lastName: String!
@@ -42,7 +42,7 @@ const schema = gql`
     customerId: ID!
   }
 
-  type Address {
+  type Address @key(fields: "id") {
     id: ID!
     customerId: ID!
     street: String!

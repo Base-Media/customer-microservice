@@ -5,9 +5,10 @@ import connectDB from './config/database';
 import appRoutes from './app';
 import schema from './graphql/schema'; // Your GraphQL schema
 import resolvers from './graphql/resolvers';
+import { buildSubgraphSchema } from '@apollo/subgraph';
 
-const app = express() as any; // Explicitly type the app as Application
 const port = 5000;
+const app = express() as any; // Explicitly type the app as Application
 
 // Middleware for raw request logging
 
@@ -17,8 +18,7 @@ connectDB();
 // Initialize Apollo Server
 const startApolloServer = async () => {
   const server = new ApolloServer({
-    typeDefs: schema,
-    resolvers,
+    schema: buildSubgraphSchema({ typeDefs: schema, resolvers }),
     formatError: (err) => {
       console.error('GraphQL Error:', err.message);
       return { message: err.message };
