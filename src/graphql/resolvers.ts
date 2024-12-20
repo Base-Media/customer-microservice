@@ -63,24 +63,6 @@ const resolvers = {
       return await SpouseService.findSpouseByCustomerId(customerId);
     },
   },
-
-  Mutation: {
-    createCustomer: async (_: any, args: any) => {
-      return await CustomerService.createCustomer(args);
-    },
-    initializeCustomer: async (_: any, { officeId }: { officeId: string }) => {
-      return await CustomerService.initializeCustomer(officeId);
-    },
-    createAddress: async (_: any, args: any) => {
-      return await AddressService.createAddress(args);
-    },
-    createDependent: async (_: any, args: any) => {
-      return await DependentService.createDependent(args);
-    },
-    createSpouse: async (_: any, args: any) => {
-      return await SpouseService.createSpouse(args);
-    },
-  },
 };
 
 export default resolvers;
