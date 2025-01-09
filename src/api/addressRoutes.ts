@@ -4,10 +4,10 @@ import AddressController from '../controllers/AddressController';
 
 const router = Router();
 
-router.post('/addresses', AddressController.createAddress);
-router.put('/addresses/:id', AddressController.updateAddress);
+router.post('/', AddressController.createAddress);
+router.put('/:id', AddressController.updateAddress);
 router.get(
-  '/addresses/customer/:customerId',
+  '/customer/:customerId',
   AddressController.findAddressByCustomerId
 );
 

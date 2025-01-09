@@ -6,16 +6,16 @@ import userDetails from '../middleware/userDetails';
 const router = express.Router();
 
 router.post(
-  '/customer/initialize',
+  '/initialize',
   userDetails,
   CustomerController.initializeCustomer
 ); // Endpoint to initialize a customer
-router.post('/customers', CustomerController.createCustomer); // Endpoint to create customer details
-router.get('/customers/:id', CustomerController.findCustomerById);
-router.get('/customers', CustomerController.findAllCustomers);
-router.get('/customer/search', CustomerController.searchCustomers);
-router.put('/customers/:id', CustomerController.updateCustomer);
-router.delete('/customers/:id', CustomerController.deleteCustomer);
-router.get('/customers/search', CustomerController.searchCustomers);
+router.post('/', CustomerController.createCustomer); // Endpoint to create customer details
+router.get('/:id', CustomerController.findCustomerById);
+router.get('/all-customers', CustomerController.findAllCustomers);
+router.get('/search', CustomerController.searchCustomers);
+router.put('/:id', CustomerController.updateCustomer);
+router.delete('/:id', CustomerController.deleteCustomer);
+router.get('/search', CustomerController.searchCustomers);
 
 export default router;

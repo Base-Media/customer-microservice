@@ -2,8 +2,8 @@
 
 import request from 'supertest';
 import express from 'express';
-import customerRoutes from '../api/customerRoutes';
-import CustomerService from '../services/CustomerService';
+import customerRoutes from '../src/api/CustomerRoutes';
+import CustomerService from '../src/services/CustomerService';
 
 const app = express();
 app.use(express.json());

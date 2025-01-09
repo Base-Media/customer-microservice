@@ -7,18 +7,13 @@ import schema from './graphql/schema'; // Your GraphQL schema
 import resolvers from './graphql/resolvers';
 import { buildSubgraphSchema } from '@apollo/subgraph';
 
-const port = 5000;
+const PORT = 4004;
 const app = express() as any; // Explicitly type the app as Application
 
-// Middleware for raw request logging
 
-// Connect to MongoDB
-connectDB();
-
-// Initialize Apollo Server
 const startApolloServer = async () => {
   const server = new ApolloServer({
-    schema: buildSubgraphSchema({ typeDefs: schema, resolvers }),
+    schema: buildSubgraphSchema({ typeDefs:schema, resolvers }),
     formatError: (err) => {
       console.error('GraphQL Error:', err.message);
       return { message: err.message };
@@ -26,23 +21,42 @@ const startApolloServer = async () => {
   });
 
   await server.start();
-  server.applyMiddleware({ app, path: '/graphql' });
+  server.applyMiddleware({ app, path: '/customers/graphql' });
+};
 
-  // Additional Express routes
-  app.use(appRoutes);
+// Initialize Apollo Server
+const startServer = async () => {
+  try {
+///connect to database
+await connectDB();
 
-  // Root route
-  app.get('/', (req: any, res: { send: (arg0: string) => void }) => {
-    res.send('Hello, world!');
-  });
 
-  // Start the server
-  app.listen(port, () => {
+app.get('/customers/health', (req: express.Request, res: express.Response) => {
+  console.log('user service is Healthy');
+  res.status(200).json({ status: ' user service is Healthy' });
+});
+
+
+ 
+
+ await startApolloServer();
+
+ app.use('/customers/v1',appRoutes);
+
+ app.listen(PORT, () => {
     console.log(
-      `Server is running at http://localhost:${port}${server.graphqlPath}`
+      `Server is running at http://localhost:${PORT}`);
+    console.log(
+      `Subgraph running endpoint: http://localhost:${PORT}/customers/graphql`
     );
   });
+
+  }catch (error) {
+    console.error('Error starting server:', error);
+  }
+ 
+ 
 };
 
 // Start Apollo Server
-startApolloServer();
+startServer();

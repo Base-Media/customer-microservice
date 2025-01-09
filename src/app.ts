@@ -10,9 +10,9 @@ import dependentRoutes from './api/dependentRoutes';
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/api', addressRoutes);
-app.use('/api', customerRoutes);
-app.use('/api/family', spouseRoutes);
-app.use('/api/family', dependentRoutes);
+app.use('/addresses', addressRoutes);
+app.use('/customers', customerRoutes);
+app.use('/family/spouse', spouseRoutes);
+app.use('/family/dependent', dependentRoutes);
 
 export default app;

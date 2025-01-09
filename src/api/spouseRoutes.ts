@@ -5,10 +5,10 @@ import SpouseController from '../controllers/SpouseController';
 
 const router = Router();
 
-router.post('/spouses', SpouseController.createSpouse);
-router.put('/spouses/:id', SpouseController.updateSpouse);
+router.post('/', SpouseController.createSpouse);
+router.put('/:id', SpouseController.updateSpouse);
 router.get(
-  '/spouses/customer/:customerId',
+  '/customer/:customerId',
   SpouseController.findSpouseByCustomerId
 );
 
