@@ -21,7 +21,7 @@ const startApolloServer = async () => {
   });
 
   await server.start();
-  server.applyMiddleware({ app, path: '/customers/graphql' });
+  server.applyMiddleware({ app, path: '/graphql' });
 };
 
 // Initialize Apollo Server
@@ -31,7 +31,7 @@ const startServer = async () => {
 await connectDB();
 
 
-app.get('/customers/health', (req: express.Request, res: express.Response) => {
+app.get('/health', (req: express.Request, res: express.Response) => {
   console.log('user service is Healthy');
   res.status(200).json({ status: ' user service is Healthy' });
 });
@@ -41,13 +41,13 @@ app.get('/customers/health', (req: express.Request, res: express.Response) => {
 
  await startApolloServer();
 
- app.use('/customers/v1',appRoutes);
+ app.use('/api/v1',appRoutes);
 
  app.listen(PORT, () => {
     console.log(
       `Server is running at http://localhost:${PORT}`);
     console.log(
-      `Subgraph running endpoint: http://localhost:${PORT}/customers/graphql`
+      `Subgraph running endpoint: http://localhost:${PORT}/graphql`
     );
   });
 
