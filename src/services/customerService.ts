@@ -73,6 +73,10 @@ class CustomerService {
    * @returns {Promise<ICustomer[]>} - An array of matching customer objects.
    */
   async searchCustomers(query: string): Promise<ICustomer[]> {
+    console.log('Received query:', query, 'Type:', typeof query);
+    if (typeof query !== 'string') {
+      throw new Error('Invalid query: Query must be a string');
+    }
     const regex = new RegExp(query, 'i'); // Create a case-insensitive regex
     return await Customer.find({
       $or: [

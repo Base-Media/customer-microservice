@@ -34,6 +34,7 @@ class CustomerController {
     try {
       const officeId = req.userDetails?.officeId;
       if (!officeId) {
+        console.log('Office ID is required');
         res.status(400).json({ error: 'Office ID is required' });
         return;
       }
@@ -94,10 +95,12 @@ class CustomerController {
    */
   async searchCustomers(req: Request, res: Response): Promise<void> {
     try {
-      const query = req.query.q as string;
+      const query = req.query.q  as string;
+      
       const customers = await CustomerService.searchCustomers(query);
       res.status(200).json(customers);
     } catch (error: any) {
+      console.log("error getting customers", error);
       res.status(500).json({ error: error.message });
     }
   }

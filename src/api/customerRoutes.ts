@@ -10,12 +10,15 @@ router.post(
   userDetails,
   CustomerController.initializeCustomer
 ); // Endpoint to initialize a customer
-router.post('/', CustomerController.createCustomer); // Endpoint to create customer details
+//router.post('/', CustomerController.createCustomer); // Endpoint to create customer details
 router.get('/:id', CustomerController.findCustomerById);
 router.get('/all-customers', CustomerController.findAllCustomers);
-router.get('/search', CustomerController.searchCustomers);
+router.get('/', (req, res, next) => {
+  console.log('Search route hit with query:', req.query.q);
+  next();
+}, CustomerController.searchCustomers);
 router.put('/:id', CustomerController.updateCustomer);
 router.delete('/:id', CustomerController.deleteCustomer);
-router.get('/search', CustomerController.searchCustomers);
+
 
 export default router;
