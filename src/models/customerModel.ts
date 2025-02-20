@@ -15,10 +15,9 @@ export interface ICustomer extends Document {
   householdIncome?: string;
   phoneNumber: string;
   email?: string;
-  officeId?: string;
   ffmId?: string;
   memberId?: string;
-  queueId: mongoose.Types.ObjectId;
+  leadId?: string;
 }
 
 const encryptSocial = new EncryptSocial();
@@ -57,18 +56,10 @@ const customerSchema = new Schema<ICustomer>(
     email: {
       type: String,
     },
-    ffmId: {
+    leadId: {
       type: String,
     },
-    memberId: {
-      type: String,
-    },
-    queueId: {
-      type: Schema.Types.ObjectId,
-    },
-    officeId: {
-      type: Schema.Types.ObjectId,
-    },
+  
   },
   { timestamps: true, collection: 'customers' }
 );
