@@ -14,6 +14,7 @@ const schema = gql`
     householdIncome: String
     phoneNumber: String!
     email: String
+    leadId: String
   }
 
   type Dependent @key(fields: "id") {
