@@ -4,9 +4,13 @@ import CustomerService from '../services/CustomerService';
 import AddressService from '../services/AddressService';
 import DependentService from '../services/DependentService';
 import SpouseService from '../services/SpouseService';
+import CommentService from '../services/CommentsService';
 import mongoose from 'mongoose';
+import { DateTimeResolver } from 'graphql-scalars';
+import Customer from '../models/customerModel';
 
 const resolvers = {
+  DateTime: DateTimeResolver,
   Query: {
     getCustomer: async (_: any, { id }: { id: string }) => {
       console.log('Received ID:', id);
@@ -62,6 +66,26 @@ const resolvers = {
     ) => {
       return await SpouseService.findSpouseByCustomerId(customerId);
     },
+
+    getCommentByCustomerId: async (
+      _: any,
+      { customerId }: { customerId: string }
+    ) => {
+      return await CommentService.findCommentsByCustomerId(customerId);
+    }
+  },
+
+  Comment:{
+    user: async (parent: any) => {
+      return { __typename: 'User', _id: parent.userId };
+    }
+  },
+
+  Customer: {
+    __resolveReference: async (parent: any) => {
+      console.log('Resolving reference for customer:',parent);
+      return await CustomerService.findCustomerById(parent._id);
+    }
   },
 };
 

@@ -1,9 +1,14 @@
 /** @format */
 import { gql } from 'graphql-tag';
+import { DateTimeTypeDefinition } from 'graphql-scalars';
+
+
 
 const schema = gql`
-  type Customer @key(fields: "id") {
-    id: ID!
+  ${DateTimeTypeDefinition}
+
+  type Customer @key(fields: "_id") {
+    _id: ID!
     firstName: String!
     lastName: String!
     middleInitial: String
@@ -50,9 +55,24 @@ const schema = gql`
     country: String!
   }
 
+
+type Comment @key(fields: "_id") {
+      _id: ID!
+      userId: ID!
+      customerId: ID!
+      subject: String!
+      comment: String!
+      createdAt: DateTime!
+      user: User @requires(fields: "userId")
+}
+
+  extend type User @key(fields: "_id") {
+    _id: ID! @external
+  }
   type Query {
-    getCustomer(id: ID!): Customer
+    getCustomer(_id: ID!): Customer
     getAllCustomers: [Customer]
+    getCommentByCustomerId(customerId: ID!): [Comment]
     getAddressByCustomerId(customerId: ID!): Address
     getDependentByCustomerId(customerId: ID!): [Dependent]
     getSpouseByCustomerId(customerId: ID!): Spouse
