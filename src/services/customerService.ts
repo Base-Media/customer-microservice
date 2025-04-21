@@ -8,12 +8,12 @@ class CustomerService {
    * Initialize a new customer, save the officeId, and generate its ID.
    * @param {string} officeId - The office ID to associate with the customer.
    * @returns {Promise<{ _id: string }>} - The generated customer ID.
-   */
+   
   async initializeCustomer(officeId: string): Promise<{ _id: string }> {
     const customer = new Customer({ officeId }); // Create a new customer with officeId
     await customer.save(); // Save the customer to the database
     return { _id: customer._id.toString() }; // Return the generated _id
-  }
+  }*/
 
   /**
    * Create a new customer with provided details and save it to the database.
@@ -105,7 +105,7 @@ class CustomerService {
   }
 
   /**
-   * Delete a customer by their ID.
+   * Delete a customer by their ID.       
    * @param {string} id - The ID of the customer to delete.
    * @returns {Promise<ICustomer | null>} - The deleted customer object, or null if not found.
    * @throws {Error} - If the provided ID is invalid.

@@ -4,7 +4,7 @@ import mongoose, { Document, Schema, model } from 'mongoose';
 import EncryptSocial from '../utils/EncryptSocial';
 
 export interface ICustomer extends Document {
-  _id: mongoose.Types.ObjectId; // Explicitly define _id
+
   firstName: string;
   lastName: string;
   middleInitial?: string;

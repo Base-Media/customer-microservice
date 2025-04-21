@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc && babel dist --out-dir dist --extensions \".js,.ts\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "docker:build": "cd .. && docker-compose build customers --no-cache",
+    "docker:up": "cd .. && docker-compose up customers -d"
   },
   "repository": {
     "type": "git",

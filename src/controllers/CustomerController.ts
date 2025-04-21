@@ -2,6 +2,7 @@
 
 import { Request, Response } from 'express';
 import CustomerService from '../services/CustomerService';
+import { ICustomer } from '../models/customerModel';
 import mongoose from 'mongoose';
 class CustomerController {
   /**
@@ -14,9 +15,7 @@ class CustomerController {
   async createCustomer(req: Request, res: Response): Promise<void> {
     try {
       const formDetails = req.body;
-      const officeId = req.userDetails?.officeId;
-      const customerData = { ...formDetails, officeId };
-      const customer = await CustomerService.createCustomer(customerData);
+      const customer = await CustomerService.createCustomer(formDetails);
       res.status(201).json(customer);
     } catch (error: any) {
       res.status(500).json({ error: error.message });
@@ -29,7 +28,7 @@ class CustomerController {
    * @param req - The request object.
    * @param res - The response object.
    * @returns A promise that resolves to void.
-   */
+   
   async initializeCustomer(req: Request, res: Response): Promise<void> {
     try {
       const officeId = req.userDetails?.officeId;
@@ -43,7 +42,7 @@ class CustomerController {
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }
-  }
+  }*/
 
   /**
    * Asynchronously finds a customer by their ID.

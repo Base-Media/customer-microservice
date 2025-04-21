@@ -1,7 +1,7 @@
 
 import mongoose, { Document, Schema, model } from 'mongoose';
 
-export interface Icomment extends Document {
+export interface IComment extends Document {
     userId: mongoose.Types.ObjectId; 
     customerId: mongoose.Types.ObjectId;
     subject: string;
@@ -10,7 +10,7 @@ export interface Icomment extends Document {
 };
 
 
-const commentSchema = new Schema<Icomment>(
+const commentSchema = new Schema<IComment>(
     {
         userId: {
             type: Schema.Types.ObjectId,
@@ -36,5 +36,5 @@ const commentSchema = new Schema<Icomment>(
 );
 
 
-const Comment = model<Icomment>('Comment', commentSchema);
+const Comment = model<IComment>('Comment', commentSchema);
 export default Comment;
