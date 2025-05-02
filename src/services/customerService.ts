@@ -87,6 +87,18 @@ class CustomerService {
     }).exec(); // Execute the search
   }
 
+  
+  async findCustomersByIds(
+    ids: string[],
+    searchTerm?: string
+  ): Promise<ICustomer[]> {
+    const filter: Record<string, any> = { _id: { $in: ids.map(id => new mongoose.Types.ObjectId(id)) } };
+    if (searchTerm) {
+      filter.$text = { $search: searchTerm };
+    }
+    return Customer.find(filter).exec();
+  }
+
   /**
    * Update a customer by their ID with the provided data.
    * @param {string} id - The ID of the customer to update.

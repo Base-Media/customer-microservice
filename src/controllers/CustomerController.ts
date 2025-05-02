@@ -1,6 +1,6 @@
 /** @format */
 
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import CustomerService from '../services/CustomerService';
 import { ICustomer } from '../models/customerModel';
 import mongoose from 'mongoose';
@@ -104,6 +104,25 @@ class CustomerController {
     }
   }
 
+  async search(req: Request, res: Response): Promise<void> {
+    try {
+      // Extract search term if provided
+      const q = typeof req.query.q === 'string' ? req.query.q : undefined;
+  
+      // Retrieve filtered customer IDs from middleware
+      const ids = req.customerIds || [];
+  console.log('Customer IDs:', ids);
+      // Fetch matching customers from database
+      const customers = await CustomerService.findCustomersByIds(ids, q);
+  
+      // Return the customer list
+      res.status(200).json(customers);
+    } catch (error: any) {
+      console.log('Error searching customers:', error);
+      console.error('Error searching customers:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
   // Update a customer by ID
   /**
    * Asynchronously updates a customer by their ID.
