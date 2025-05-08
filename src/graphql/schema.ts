@@ -20,7 +20,13 @@ const schema = gql`
     phoneNumber: String!
     email: String
     leadId: String
+    
+    backOffice: BackOffice 
   }
+
+  type BackOffice @key(fields: "customerId") {
+  customerId: ID!
+}
 
   type Dependent @key(fields: "id") {
     id: ID!
@@ -68,6 +74,7 @@ type Comment @key(fields: "_id") {
 
   extend type User @key(fields: "_id") {
     _id: ID! @external
+
   }
   type Query {
     getCustomer(_id: ID!): Customer

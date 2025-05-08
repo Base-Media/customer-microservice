@@ -7,7 +7,7 @@ import SpouseService from '../services/SpouseService';
 import CommentService from '../services/CommentsService';
 import mongoose from 'mongoose';
 import { DateTimeResolver } from 'graphql-scalars';
-import Customer from '../models/customerModel';
+
 
 const resolvers = {
   DateTime: DateTimeResolver,
@@ -81,12 +81,17 @@ const resolvers = {
     }
   },
 
+  
   Customer: {
     __resolveReference: async (parent: any) => {
       console.log('Resolving reference for customer:',parent);
       return await CustomerService.findCustomerById(parent._id);
-    }
-  },
+    },
+    backOffice: async (parent: any) => {
+      return {__typename:'BackOffice',customerId: parent._id};
+  }
+}, 
+ 
 };
 
 export default resolvers;
