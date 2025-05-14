@@ -16,8 +16,8 @@ const schema = gql`
     ssn: String
     dob: String!
     occupation: String
-    householdIncome: String
-    phoneNumber: String!
+    householdIncome: String  
+    phoneNumber: String
     email: String
     leadId: String
     
