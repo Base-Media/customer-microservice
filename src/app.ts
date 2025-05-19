@@ -12,7 +12,7 @@ import commentRoutes from './api/commentRoutes';
 
 const app = express();
 app.use(cors({
-    origin: [ 'http://localhost:5173','http://localhost:5174', 'https://main.d39s06ite0zb3q.amplifyapp.com', 'https://main.d1xyxumoctgjix.amplifyapp.com'],
+    origin: [ 'http://localhost:5173','http://localhost:5174', 'https://main.d39s06ite0zb3q.amplifyapp.com', 'https://main.d1xyxumoctgjix.amplifyapp.com', 'https://siadash.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
