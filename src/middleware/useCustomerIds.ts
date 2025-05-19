@@ -28,7 +28,7 @@ export async function useCustomerIds(
 
   // Build filter based on role
   let filter: Record<string, any> = {};
-  if (user.role === 'Admin') {
+  if (user.role === 'Admin' || user.role === 'Custo') {
     if (!user.officeId) {
       res.status(400).json({ message: 'Office ID required for Admin role' });
       return; // Ensure the response cycle ends here
