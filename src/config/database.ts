@@ -1,11 +1,19 @@
 /** @format */
 
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(
-      'mongodb+srv://claude_lamarre:Master7001@synergydash-prod-01.amkflq9.mongodb.net/customers'
-    );
+    const customerDbUri = process.env.CUSTOMER_DB_URI as string;
+    
+    if (!customerDbUri) {
+      throw new Error('CUSTOMER_DB_URI environment variable is not defined');
+    }
+
+    const conn = await mongoose.connect(customerDbUri);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     if (error instanceof Error) {
