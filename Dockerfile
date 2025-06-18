@@ -13,7 +13,7 @@ RUN npm install
 # Copy only the source code AFTER installing dependencies
 COPY . .
 
-# Build the TypeScript code
+# Build the NestJS application
 RUN npm run build
 
 # Ensure the dist directory is present (debugging step)
