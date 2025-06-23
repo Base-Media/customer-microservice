@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { Field, ObjectType, ID } from '@nestjs/graphql';
+import { Field, ObjectType, ID, Directive } from '@nestjs/graphql';
 
-@ObjectType()
+@ObjectType('CustomerAddress')
+@Directive('@key(fields: "_id")')
 @Schema({ timestamps: true, collection: 'addresses' })
-export class Address extends Document {
+export class CustomerAddress extends Document {
   @Field(() => ID)
   _id: string;
 
@@ -43,5 +44,5 @@ export class Address extends Document {
   updatedAt: Date;
 }
 
-export const AddressSchema = SchemaFactory.createForClass(Address);
-export type AddressDocument = Address & Document;
+export const CustomerAddressSchema = SchemaFactory.createForClass(CustomerAddress);
+export type CustomerAddressDocument = CustomerAddress & Document;

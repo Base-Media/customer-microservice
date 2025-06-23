@@ -73,8 +73,9 @@ export class Customer extends Document {
 
   @Field({ nullable: true })
   @Prop()
-  ffmId?: string;
+  FFMId?: string;
 
+  
   @Field({ nullable: true })
   @Prop()
   memberId?: string;
@@ -82,6 +83,18 @@ export class Customer extends Document {
   @Field({ nullable: true })
   @Prop()
   leadId?: string;
+
+  @Field({ nullable: true })
+  @Prop()
+  AOR: string;
+
+  @Field({ nullable: true })
+  @Prop()
+  NPN: string;
+
+  @Field({ nullable: true })
+  @Prop()
+  QLE: string;
 
   @Field(() => ID, { nullable: true })
   @Prop({ type: Types.ObjectId })
