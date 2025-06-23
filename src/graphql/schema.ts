@@ -9,8 +9,8 @@ const schema = gql`
 
   type Customer @key(fields: "_id") {
     _id: ID!
-    firstName: String!
-    lastName: String!
+    firstName: String
+    lastName: String
     middleInitial: String
     gender: String
     ssn: String
